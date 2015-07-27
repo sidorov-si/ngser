@@ -39,6 +39,7 @@ from os.path import isfile
 from os.path import basename
 from os.path import splitext
 from os.path import join
+from os import makedirs
 
 
 def remove_n_rich(n_threshold, left_reads_filename, right_reads_filename, output_directory):
@@ -139,6 +140,10 @@ if __name__ == '__main__':
             sys.exit(1)
     else:
         n_threshold = 10 # remove all reads with 'N' percentage grater than 10.
+
+    if output_directory != '':
+        if not exists(output_directory):
+            makedirs(output_directory)
     
     remove_n_rich(n_threshold, left_reads_filename, right_reads_filename, output_directory)
 
