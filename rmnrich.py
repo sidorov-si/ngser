@@ -74,8 +74,6 @@ def remove_n_rich(n_threshold, left_reads_filename, right_reads_filename, output
             left_len = len(left_seq)
             left_n_content = left_seq.count('N')
             left_fraction = float(left_n_content) / float(left_len)
-            #print read_num
-            #print 'left_len', left_len, 'left_n_content', left_n_content, 'left_fraction', left_fraction
             if left_fraction * 100 > float(n_threshold):
                 continue
             elif right_exists:
