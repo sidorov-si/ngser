@@ -105,7 +105,7 @@ def rm_low_quality_reads(f_threshold, q_threshold, left_reads_filename, right_re
 
 
 if __name__ == '__main__':
-    arguments = docopt(__doc__, version='rmnrich 0.1')
+    arguments = docopt(__doc__, version='rmlowq 0.1')
     left_reads_filename = arguments["-i"]
 
     if not exists(left_reads_filename):
