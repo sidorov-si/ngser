@@ -60,6 +60,7 @@ def rm_low_quality_reads(f_threshold, q_threshold, left_reads_filename, right_re
             right_out = open(right_output, 'w')
             right_exists = True
         read_num = 1
+        skipped_reads_num = 0
         while True:
             left_id = left.readline().rstrip('\n')
             if not left_id:
@@ -76,6 +77,10 @@ def rm_low_quality_reads(f_threshold, q_threshold, left_reads_filename, right_re
                 right_delim = right.readline().rstrip('\n')
                 right_quality = right.readline().rstrip('\n')
             left_len = len(left_seq)
+            if left_len == 0:
+                print 'Skip a read with 0 length.'
+                skipped_reads_num += 1
+                continue
             left_low_scores = [score for score in list(left_quality) \
                                if ord(score) < q_base + q_threshold]
             left_low_scores_count = len(left_low_scores)
@@ -103,9 +108,12 @@ def rm_low_quality_reads(f_threshold, q_threshold, left_reads_filename, right_re
         if right_exists:
             right.close()
 
+        if skipped_reads_num != 0:
+            print 'Skipped ' + str(skipped_reads_num) + ' with 0 length.'
+
 
 if __name__ == '__main__':
-    arguments = docopt(__doc__, version='rmlowq 0.1')
+    arguments = docopt(__doc__, version='rmlowq 0.2')
     left_reads_filename = arguments["-i"]
 
     if not exists(left_reads_filename):
