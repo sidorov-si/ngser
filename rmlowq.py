@@ -89,6 +89,10 @@ def rm_low_quality_reads(f_threshold, q_threshold, left_reads_filename, right_re
                 continue
             elif right_exists:
                 right_len = len(right_seq)
+                if right_len == 0:
+                    print 'Skip a read with 0 length.'
+                    skipped_reads_num += 1
+                    continue
                 right_low_scores = [score for score in list(right_quality) \
                                     if ord(score) < q_base + q_threshold]
                 right_low_scores_count = len(right_low_scores)
