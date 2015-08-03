@@ -56,6 +56,8 @@ def remove_n_rich(n_threshold, left_reads_filename, right_reads_filename, output
             right_out = open(right_output, 'w')
             right_exists = True
         read_num = 1
+        skipped_reads_num = 0
+        print 'Started reads processing.'
         while True:
             left_id = left.readline().rstrip('\n')
             if not left_id:
@@ -72,12 +74,19 @@ def remove_n_rich(n_threshold, left_reads_filename, right_reads_filename, output
                 right_delim = right.readline().rstrip('\n')
                 right_quality = right.readline().rstrip('\n')
             left_len = len(left_seq)
+            if left_len == 0:
+                print 'Skip a read with 0 length.'
+                skipped_reads_num += 1
+                continue
             left_n_content = left_seq.count('N')
             left_fraction = float(left_n_content) / float(left_len)
             if left_fraction * 100 > float(n_threshold):
                 continue
             elif right_exists:
                 right_len = len(right_seq)
+                if right_len == 0:
+                    print 'Skip a read with 0 length'
+                    continue
                 right_n_content = right_seq.count('N')
                 right_fraction = float(right_n_content) / float(right_len)
                 if right_fraction * 100 > float(n_threshold):
@@ -94,6 +103,11 @@ def remove_n_rich(n_threshold, left_reads_filename, right_reads_filename, output
 
         if right_exists:
             right.close()
+
+        if skipped_reads_num != 0:
+            print 'Skipped ' + str(skipped_reads_num) + ' reads with 0 length.'
+
+        print 'Finished reads processing.'
 
 
 if __name__ == '__main__':
