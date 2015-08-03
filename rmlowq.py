@@ -47,14 +47,14 @@ from os import makedirs
 
 def rm_low_quality_reads(f_threshold, q_threshold, left_reads_filename, right_reads_filename, \
                          output_directory, q_base):
-    left_output_name = splitext(basename(left_reads_filename))[0] + '_q' + \
+    left_output_name = splitext(basename(left_reads_filename))[0] + '.q' + \
                        str(q_threshold) + 'f' + str(f_threshold) + '.fastq'
     left_output = join(output_directory, left_output_name)
     with open(left_reads_filename, 'r') as left, open(left_output, 'w') as left_out:
         right_exists = False
         if right_reads_filename != None:
             right = open(right_reads_filename, 'r')
-            right_output_name = splitext(basename(right_reads_filename))[0] + '_q' + \
+            right_output_name = splitext(basename(right_reads_filename))[0] + '.q' + \
                                 str(q_threshold) + 'f' + str(f_threshold) + '.fastq'
             right_output = join(output_directory, right_output_name)
             right_out = open(right_output, 'w')

@@ -43,14 +43,14 @@ from os import makedirs
 
 
 def remove_n_rich(n_threshold, left_reads_filename, right_reads_filename, output_directory):
-    left_output_name = splitext(basename(left_reads_filename))[0] + '_Nleq' + \
+    left_output_name = splitext(basename(left_reads_filename))[0] + '.Nleq' + \
                        str(n_threshold) + '.fastq'
     left_output = join(output_directory, left_output_name)
     with open(left_reads_filename, 'r') as left, open(left_output, 'w') as left_out:
         right_exists = False
         if right_reads_filename != None:
             right = open(right_reads_filename, 'r')
-            right_output_name = splitext(basename(right_reads_filename))[0] + '_Nleq' + \
+            right_output_name = splitext(basename(right_reads_filename))[0] + '.Nleq' + \
                                 str(n_threshold) + '.fastq'
             right_output = join(output_directory, right_output_name)
             right_out = open(right_output, 'w')
