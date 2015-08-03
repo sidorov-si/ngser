@@ -61,6 +61,7 @@ def rm_low_quality_reads(f_threshold, q_threshold, left_reads_filename, right_re
             right_exists = True
         read_num = 1
         skipped_reads_num = 0
+        print 'Started reads processing.'
         while True:
             left_id = left.readline().rstrip('\n')
             if not left_id:
@@ -114,6 +115,8 @@ def rm_low_quality_reads(f_threshold, q_threshold, left_reads_filename, right_re
 
         if skipped_reads_num != 0:
             print 'Skipped ' + str(skipped_reads_num) + ' with 0 length.'
+
+        print 'Finished reads processing.'
 
 
 if __name__ == '__main__':
