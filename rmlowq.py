@@ -67,7 +67,7 @@ def rm_low_quality_reads(f_threshold, q_threshold, left_reads_filename, right_re
             if not left_id:
                 break # EOF is reached
             read_num += 1
-            if read_num % 500000 == 0:
+            if read_num % 1000000 == 0:
 	        print read_num, 'reads processed.'
             left_seq = left.readline().rstrip('\n')
             left_delim = left.readline().rstrip('\n')
