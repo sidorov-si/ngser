@@ -63,8 +63,8 @@ def remove_n_rich(n_threshold, left_reads_filename, right_reads_filename, output
             if not left_id:
                 break # EOF is reached
             read_num += 1
-            if read_num % 500000 == 0:
-	        print read_num, 'reads processed.'
+            if read_num % 1000000 == 0:
+	        print read_num, 'of reads are processed.'
             left_seq = left.readline().rstrip('\n')
             left_delim = left.readline().rstrip('\n')
             left_quality = left.readline().rstrip('\n')

@@ -68,7 +68,7 @@ def rm_low_quality_reads(f_threshold, q_threshold, left_reads_filename, right_re
                 break # EOF is reached
             read_num += 1
             if read_num % 1000000 == 0:
-	        print read_num, 'reads processed.'
+	        print read_num, 'of reads are processed.'
             left_seq = left.readline().rstrip('\n')
             left_delim = left.readline().rstrip('\n')
             left_quality = left.readline().rstrip('\n')
