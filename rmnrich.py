@@ -66,13 +66,63 @@ def remove_n_rich(n_threshold, left_reads_filename, right_reads_filename, output
             if read_num % 1000000 == 0:
 	        print read_num, 'of reads are processed.'
             left_seq = left.readline().rstrip('\n')
+            if not left_seq: # FASTQ file is incomplit
+                print 'Error: FASTQ file ' + left_reads_filename + ' is incomplete.'
+                print 'The last line is'
+                print left_id
+                if right_exists:
+                    right.close()
+                sys.exit(1)
             left_delim = left.readline().rstrip('\n')
+            if not left_delim: # FASTQ file is incomplit
+                print 'Error: FASTQ file ' + left_reads_filename + ' is incomplete.'
+                print 'The last lines are'
+                print left_id
+                print left_seq
+                if right_exists:
+                    right.close()
+                sys.exit(1)
             left_quality = left.readline().rstrip('\n')
+            if not left_quality: # FASTQ file is incomplit
+                print 'Error: FASTQ file ' + left_reads_filename + ' is incomplete.'
+                print 'The last lines are'
+                print left_id
+                print left_seq
+                print left_delim
+                if right_exists:
+                    right.close()
+                sys.exit(1)
             if right_exists:
                 right_id = right.readline().rstrip('\n')
+                if not right_id: # right_reads_filename file is incomplete
+                    print 'Error: FASTQ file ' + right_reads_filename + ' is incomplete.'
+                    print 'There is a read with ID ' + left_id + ' in ' + left_reads_filename + ' but no corresponding read in ' + right_reads_filename
+                    sys.exit(1)
                 right_seq = right.readline().rstrip('\n')
+                if not right_seq: # FASTQ file is incomplete
+                    print 'Error: FASTQ file' + right_reads_filename + ' is incomplete.'
+                    print 'The last line is'
+                    print right_id
+                    right.close()
+                    sys.exit(1)
                 right_delim = right.readline().rstrip('\n')
+                if not right_delim: # FASTQ file is incomplete
+                    print 'Error: FASTQ file' + right_reads_filename + ' is incomplete.'
+                    print 'The last lines are'
+                    print right_id
+                    print right_seq
+                    right.close()
+                    sys.exit(1)
                 right_quality = right.readline().rstrip('\n')
+                if not right_quality: # FASTQ file is incomplete
+                    print 'Error: FASTQ file' + right_reads_filename + ' is incomplete.'
+                    print 'The last lines are'
+                    print right_id
+                    print right_seq
+                    print right_delim
+                    right.close()
+                    sys.exit(1)
+
             left_len = len(left_seq)
             if left_len == 0:
                 print 'Skip a read with 0 length.'
@@ -111,7 +161,7 @@ def remove_n_rich(n_threshold, left_reads_filename, right_reads_filename, output
 
 
 if __name__ == '__main__':
-    arguments = docopt(__doc__, version='rmnrich 0.1')
+    arguments = docopt(__doc__, version='rmnrich 0.2')
     left_reads_filename = arguments["-i"]
 
     if not exists(left_reads_filename):
