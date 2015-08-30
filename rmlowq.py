@@ -110,7 +110,8 @@ def rm_low_quality_reads(f_threshold, q_threshold, left_reads_filename, right_re
                 right_id = right.readline().rstrip('\n')
                 if not right_id: # right_reads_filename file is incomplete
                     print 'Error: FASTQ file ' + right_reads_filename + ' is incomplete.'
-                    print 'There is a read with ID ' + left_id + ' in ' + left_reads_filename + ' but no corresponding read in ' + right_reads_filename
+                    print 'There is a read with ID ' + left_id + ' in ' + left_reads_filename + \
+                          ' but no corresponding read in ' + right_reads_filename
                     sys.exit(1)
                 right_seq = right.readline().rstrip('\n')
                 if not right_seq: # FASTQ file is incomplete
