@@ -59,7 +59,7 @@ def rm_low_quality_reads(f_threshold, q_threshold, left_reads_filename, right_re
             right_output = join(output_directory, right_output_name)
             right_out = open(right_output, 'w')
             right_exists = True
-        read_num = 1
+        read_num = 0
         skipped_reads_num = 0
         print 'Started reads processing.'
         while True:
@@ -75,7 +75,7 @@ def rm_low_quality_reads(f_threshold, q_threshold, left_reads_filename, right_re
             if read_num % 1000000 == 0:
 	        print read_num, 'of reads are processed.'
             left_seq = left.readline().rstrip('\n')
-            if not left_seq: # FASTQ file is incomplit
+            if not left_seq: # FASTQ file is incomplete
                 print 'Error: FASTQ file ' + left_reads_filename + ' is incomplete.'
                 print 'The last line is'
                 print left_id
@@ -83,7 +83,7 @@ def rm_low_quality_reads(f_threshold, q_threshold, left_reads_filename, right_re
                     right.close()
                 sys.exit(1)
             left_delim = left.readline().rstrip('\n')
-            if not left_delim: # FASTQ file is incomplit
+            if not left_delim: # FASTQ file is incomplete
                 print 'Error: FASTQ file ' + left_reads_filename + ' is incomplete.'
                 print 'The last lines are'
                 print left_id
@@ -92,7 +92,7 @@ def rm_low_quality_reads(f_threshold, q_threshold, left_reads_filename, right_re
                     right.close()
                 sys.exit(1)
             left_quality = left.readline().rstrip('\n')
-            if not left_quality: # FASTQ file is incomplit
+            if not left_quality: # FASTQ file is incomplete
                 print 'Error: FASTQ file ' + left_reads_filename + ' is incomplete.'
                 print 'The last lines are'
                 print left_id
