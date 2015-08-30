@@ -51,6 +51,8 @@ def rm_low_quality_reads(f_threshold, q_threshold, left_reads_filename, right_re
                        str(q_threshold) + 'f' + str(f_threshold) + '.fastq'
     left_output = join(output_directory, left_output_name)
     with open(left_reads_filename, 'r') as left, open(left_output, 'w') as left_out:
+        print 'Left (forward or single) reads: ' + left_reads_filename
+        print 'Left (forward or single) reads output file: ' + left_output
         right_exists = False
         if right_reads_filename != None:
             right = open(right_reads_filename, 'r')
@@ -59,6 +61,8 @@ def rm_low_quality_reads(f_threshold, q_threshold, left_reads_filename, right_re
             right_output = join(output_directory, right_output_name)
             right_out = open(right_output, 'w')
             right_exists = True
+            print 'Right (reverse) reads: ' + right_reads_filename
+            print 'Right (reverse) reads output file: ' + right_output
         read_num = 0
         skipped_reads_num = 0
         print 'Started reads processing.'
