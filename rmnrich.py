@@ -61,11 +61,12 @@ def remove_n_rich(n_threshold, left_reads_filename, right_reads_filename, output
         while True:
             left_id = left.readline().rstrip('\n')
             if not left_id:
-                right_line = right.readline().rstrip('\n')
-                if right_line:
-                    print 'Error: FASTQ file ' + right_reads_filename + \
-                          ' contains more lines than ' + left_reads_filename
-                    sys.exit(1)
+                if right_exists:
+                    right_line = right.readline().rstrip('\n')
+                    if right_line:
+                        print 'Error: FASTQ file ' + right_reads_filename + \
+                              ' contains more lines than ' + left_reads_filename
+                        sys.exit(1)
                 break # EOF is reached
             reads_number += 1
             if reads_number % 1000000 == 0:
