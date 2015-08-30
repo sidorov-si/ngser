@@ -6,3 +6,5 @@ This program is free software; you can redistribute it and/or modify it under th
 **rmnrich.py:** remove reads with 'N' % greater than a threshold.
 
 **rmlowq.py:** remove reads with more than a fraction_threshold% of low quality bases (i. e., bases that have a score less than a quality_threshold).
+
+**rmerge.py:** merge forward reads from one FASTQ file with reverse reads from the other FASTQ file into one FASTQ file.
