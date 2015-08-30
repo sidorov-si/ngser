@@ -55,7 +55,7 @@ def remove_n_rich(n_threshold, left_reads_filename, right_reads_filename, output
             right_output = join(output_directory, right_output_name)
             right_out = open(right_output, 'w')
             right_exists = True
-        read_num = 1
+        reads_number = 0
         skipped_reads_num = 0
         print 'Started reads processing.'
         while True:
@@ -67,11 +67,11 @@ def remove_n_rich(n_threshold, left_reads_filename, right_reads_filename, output
                           ' contains more lines than ' + left_reads_filename
                     sys.exit(1)
                 break # EOF is reached
-            read_num += 1
-            if read_num % 1000000 == 0:
+            reads_number += 1
+            if reads_number % 1000000 == 0:
 	        print read_num, 'of reads are processed.'
             left_seq = left.readline().rstrip('\n')
-            if not left_seq: # FASTQ file is incomplit
+            if not left_seq: # FASTQ file is incomplete
                 print 'Error: FASTQ file ' + left_reads_filename + ' is incomplete.'
                 print 'The last line is'
                 print left_id
@@ -79,7 +79,7 @@ def remove_n_rich(n_threshold, left_reads_filename, right_reads_filename, output
                     right.close()
                 sys.exit(1)
             left_delim = left.readline().rstrip('\n')
-            if not left_delim: # FASTQ file is incomplit
+            if not left_delim: # FASTQ file is incomplete
                 print 'Error: FASTQ file ' + left_reads_filename + ' is incomplete.'
                 print 'The last lines are'
                 print left_id
@@ -88,7 +88,7 @@ def remove_n_rich(n_threshold, left_reads_filename, right_reads_filename, output
                     right.close()
                 sys.exit(1)
             left_quality = left.readline().rstrip('\n')
-            if not left_quality: # FASTQ file is incomplit
+            if not left_quality: # FASTQ file is incomplete
                 print 'Error: FASTQ file ' + left_reads_filename + ' is incomplete.'
                 print 'The last lines are'
                 print left_id
