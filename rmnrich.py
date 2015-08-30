@@ -46,6 +46,8 @@ def remove_n_rich(n_threshold, left_reads_filename, right_reads_filename, output
     left_output_name = splitext(basename(left_reads_filename))[0] + '.Nleq' + \
                        str(n_threshold) + '.fastq'
     left_output = join(output_directory, left_output_name)
+    print 'Left (forward or single) reads file: ' + left_reads_filename
+    print 'Left (forward or single) reads output file: ' + left_output
     with open(left_reads_filename, 'r') as left, open(left_output, 'w') as left_out:
         right_exists = False
         if right_reads_filename != None:
@@ -55,6 +57,8 @@ def remove_n_rich(n_threshold, left_reads_filename, right_reads_filename, output
             right_output = join(output_directory, right_output_name)
             right_out = open(right_output, 'w')
             right_exists = True
+            print 'Right (reverse) reads file: ' + right_reads_filename
+            print 'Right (reverse) reads output file: ' + right_output
         reads_number = 0
         skipped_reads_num = 0
         print 'Started reads processing.'
