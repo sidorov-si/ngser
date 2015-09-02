@@ -74,7 +74,7 @@ def remove_n_rich(n_threshold, left_reads_filename, right_reads_filename, output
                 break # EOF is reached
             reads_number += 1
             if reads_number % 1000000 == 0:
-	        print read_num, 'of reads are processed.'
+	        print reads_number, 'of reads are processed.'
             left_seq = left.readline().rstrip('\n')
             if not left_seq: # FASTQ file is incomplete
                 print 'Error: FASTQ file ' + left_reads_filename + ' is incomplete.'
